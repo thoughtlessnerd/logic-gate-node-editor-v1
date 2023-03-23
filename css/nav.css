@@ -1,0 +1,66 @@
+ul#nav
+{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background-color: #333;
+    box-shadow: 0px 2px 10px #111;
+    padding: 5px;
+}
+
+ul#nav li
+{
+    display: inline-block;
+    margin: 0px 5px;
+}
+
+ul#nav li a
+{
+    display: inline-block;
+    padding: 7px;
+    font-size: 12px;
+    background-color: #666;
+    color: #ddd;
+    border-radius: 10px;
+}
+
+ul#nav li a:hover
+{
+    background: #5379B4;
+}
+
+ul#fileDropdown
+{
+    display: none;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: 200px; /* Width of Menu Items */
+    border-radius: 5px;
+    padding: 7px 0px;
+    background: rgba(35, 35, 35, .95);
+    box-shadow: 0px 0px 10px #111;
+}
+
+ul#fileDropdown li
+{
+    position: relative;
+    background: transparent;
+}
+
+ul#fileDropdown li a
+{
+    display: block;
+    text-decoration: none;
+    background: transparent; /* IE6 Bug */
+    width: 100%;
+    background: transparent;
+    color: #C0C0C0;
+    padding: 5px 35px;
+    cursor: default;
+}
+
+ul#fileDropdown li a:hover { color: #ddd; background: #5379B4; }

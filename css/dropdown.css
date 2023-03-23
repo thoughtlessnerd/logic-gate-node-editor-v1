@@ -1,0 +1,89 @@
+*:focus
+{
+    outline: none;
+}
+
+body {
+    font: normal 10px verdana;
+}
+
+ul#dropdown {
+    display: none;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: 200px; /* Width of Menu Items */
+    border-radius: 5px;
+    padding: 7px 0px;
+    background: rgba(35, 35, 35, .95);
+    box-shadow: 0px 0px 5px #111;
+}
+
+ul#dropdown li {
+    position: relative;
+    background: transparent;
+}
+
+li ul#dropdown {
+    position: absolute;
+    left: 199px; /* Set 1px less than menu width */
+    top: -6px;
+    display: none;
+}
+
+/* li ul li
+{
+    padding: 5px;
+} */
+
+li ul#dropdown li a
+{
+    font-size: 10px;
+}
+
+ul#dropdown li span
+{
+    display: block;
+    padding: 3px 10px 10px 10px;
+    color: #888;
+    font-size: 11px;
+    cursor: default;
+}
+
+ul#dropdown li ul#dropdown li span
+{
+    padding: 3px 10px 3px 10px;
+}
+
+ul#dropdown li a
+{
+    display: block;
+    text-decoration: none;
+    background: transparent; /* IE6 Bug */
+    width: 200px;
+    background: transparent;
+    color: #C0C0C0;
+    padding: 5px 35px;
+    cursor: default;
+}
+
+ul#dropdown li#search
+{
+    border: none;
+    border-top: 1px solid #444;
+    border-bottom: 1px solid #444;
+    padding: 5px 0px;
+}
+
+/* Fix IE. Hide from IE Mac \*/
+* html ul#dropdown li { float: left; height: 1%; }
+* html ul#dropdown li a { height: 1%; }
+/* End */
+
+ul#dropdown li a:hover { color: #ddd; background: #5379B4; } /* Hover Styles */
+
+li ul#dropdown li a { padding: 5px 30px; } /* Sub Menu Styles */
+
+li:hover ul#dropdown, li.over-left ul#dropdown { display: block; left: -201px} /* The magic */
+li:hover ul#dropdown, li.over-right ul#dropdown { display: block; left: 199px} /* The magic */
