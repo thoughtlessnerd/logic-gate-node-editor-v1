@@ -1,98 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logic gates node editor</title>
-    <link rel="stylesheet" href="./css/dropdown.css">
-    <link rel="stylesheet" href="./css/searchBox.css">
-    <link rel="stylesheet" href="./css/nav.css">
-    <style>
-        *
-        {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Bitstream Vera', sans-serif;
-            user-select: none;
-        }
-        
-        html
-        {
-            overflow-x: hidden;
-        }
-        
-        body
-        {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-    </style>
-</head>
-<body>
-    
-    <ul id="searchBox">
-        <li><input type="text" id="SearchText" placeholder="Search..."></li>
-        <li>
-            <ul id="SearchBoxDropdown">
-                <li><a onclick="singleInputNode()">Single Input Node</a></li>
-                <li><a onclick="singleOutputNode()">Single Output Node</a></li>
-                <li><a onclick="addAndNode()">And Node</a></li> 
-                <li><a onclick="addNotNode()">Not node</a></li> 
-                <li><a onclick="addOrNode()">Or node</a></li> 
-                <li><a onclick="addXorNode()">Xor node</a></li> 
-                <li><a onclick="addXandNode()">Xand node</a></li> 
-            </ul>
-        </li>
-        <li><span id="scroller">\/</span></li>
-    </ul>
-    
-    <ul id="dropdown">
-        <li><span id="Name">Add</span></li>
-        <li id="search"><a onclick="showSearchBox()">Search...</a></li>
-        <li><a>Input & OutPut</a>
-            <ul id="dropdown"> 
-                <li><a onclick="singleInputNode()">Single Input Node</a></li>
-                <li><a onclick="singleOutputNode()">Single Output Node</a></li>
-            </ul> 
-        </li> 
-        <li><a href="#">Basic Nodes</a> 
-            <ul id="dropdown"> 
-                <li><a onclick="addAndNode()">And Node</a></li> 
-                <li><a onclick="addNotNode()">Not node</a></li> 
-                <li><a onclick="addOrNode()">Or node</a></li> 
-                <li><a onclick="addXorNode()">Xor node</a></li> 
-                <li><a onclick="addXandNode()">Xand node</a></li> 
-            </ul> 
-        </li> 
-        <li><a>Group</a> 
-            <ul id="dropdown"> 
-                <li><span>Coming soon...</span></li>
-            </ul> 
-        </li> 
-    </ul>
-    
-    <ul id="nav">
-        <li><a onclick="showFileDropdown()">File</a></li>
-        <li><a>Edit</a></li>
-    </ul>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Logic gates node editor</title>
+        <link rel="stylesheet" href="./css/dropdown.css" />
+        <link rel="stylesheet" href="./css/searchBox.css" />
+        <link rel="stylesheet" href="./css/nav.css" />
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: "Bitstream Vera", sans-serif;
+                user-select: none;
+            }
 
-    <ul id="fileDropdown">
-        <li><a onclick="newFile()">New</a></li>
-        <li><a>Open</a></li>
-        <li><a>Save</a></li>
-        <li><a>Exit</a></li>
-    </ul>
-    <canvas id="graph"></canvas>
-    <input type="range" id="scale" max="2.4" min="1" step="0.1" style="position: absolute; display: none">
-</body>
-<script>
-</script>
-<script defer src="./scripts/logicGatesClasses.js"></script>
-<script defer src="./scripts/logicGatesSetup.js"></script>
-<script defer src="./scripts/UiFunctions.js"></script>
-<script defer src="./scripts/logicGatesEventListeners.js"></script>
+            html {
+                overflow-x: hidden;
+            }
+
+            body {
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+        </style>
+    </head>
+    <body>
+        <ul id="searchBox">
+            <li>
+                <input type="text" id="SearchText" placeholder="Search..." />
+            </li>
+            <li>
+                <ul id="SearchBoxDropdown">
+                    <li>
+                        <a onclick="singleInputNode()">Single Input Node</a>
+                    </li>
+                    <li>
+                        <a onclick="singleOutputNode()">Single Output Node</a>
+                    </li>
+                    <li><a onclick="addAndNode()">And Node</a></li>
+                    <li><a onclick="addNotNode()">Not node</a></li>
+                    <li><a onclick="addOrNode()">Or node</a></li>
+                    <li><a onclick="addXorNode()">Xor node</a></li>
+                    <li><a onclick="addXandNode()">Xand node</a></li>
+                </ul>
+            </li>
+            <li><span id="scroller">\/</span></li>
+        </ul>
+
+        <ul id="dropdown">
+            <li><span id="Name">Add</span></li>
+            <li id="search"><a onclick="showSearchBox()">Search...</a></li>
+            <li>
+                <a>Input & OutPut</a>
+                <ul id="dropdown">
+                    <li>
+                        <a onclick="singleInputNode()">Single Input Node</a>
+                    </li>
+                    <li>
+                        <a onclick="singleOutputNode()">Single Output Node</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Basic Nodes</a>
+                <ul id="dropdown">
+                    <li><a onclick="addAndNode()">And Node</a></li>
+                    <li><a onclick="addNotNode()">Not node</a></li>
+                    <li><a onclick="addOrNode()">Or node</a></li>
+                    <li><a onclick="addXorNode()">Xor node</a></li>
+                    <li><a onclick="addXandNode()">Xand node</a></li>
+                </ul>
+            </li>
+            <li>
+                <a>Group</a>
+                <ul id="dropdown">
+                    <li><span>Coming soon...</span></li>
+                </ul>
+            </li>
+        </ul>
+
+        <ul id="nav">
+            <li><a onclick="showFileDropdown()">File</a></li>
+            <li><a>Edit</a></li>
+        </ul>
+
+        <ul id="fileDropdown">
+            <li><a onclick="newFile()">New</a></li>
+            <li><a>Open</a></li>
+            <li><a>Save</a></li>
+            <li><a>Exit</a></li>
+        </ul>
+        <canvas id="graph"></canvas>
+        <input
+            type="range"
+            id="scale"
+            max="2.4"
+            min="1"
+            step="0.1"
+            style="position: absolute; display: none"
+        />
+    </body>
+    <script defer>
+        alert(
+            "Quick instructions to use:\nshift + A - add nodes\nx - delete nodes\ng - move nodes"
+        );
+    </script>
+    <script defer src="./scripts/logicGatesClasses.js"></script>
+    <script defer src="./scripts/logicGatesSetup.js"></script>
+    <script defer src="./scripts/UiFunctions.js"></script>
+    <script defer src="./scripts/logicGatesEventListeners.js"></script>
 </html>
