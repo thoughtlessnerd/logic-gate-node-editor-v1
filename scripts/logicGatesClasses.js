@@ -963,3 +963,104 @@ class NandNode {
     };
   }
 }
+
+class NorNode {
+  constructor(x, y) {
+    this.inputs = [];
+    this.inputLines = [];
+    this.outputs = [];
+    this.outputLines = [];
+    this.height = basicNodes.height / globalScale;
+    this.width = basicNodes.width / globalScale;
+    this.x = x;
+    this.y = y;
+    this.fontSize = 15 / globalScale;
+    let inputGap = this.height / 3;
+    let outputGap = this.height / 2;
+    this.type = "MidNode";
+    for (let i = 0; i < 2; ++i) {
+      this.inputs.push(new StartNode(this.x, this.y + inputGap * (i + 1)));
+      this.inputs[i].group = this;
+    }
+    for (let i = 0; i < 1; ++i) {
+      this.outputs.push(
+        new EndNode(this.x + this.width, this.y + outputGap * (i + 1))
+      );
+      this.outputs[i].group = this;
+    }
+    this.allNodeIndex = allNodes.length;
+    this.midNodeIndex = midNodes.length;
+    allNodes.push(this);
+    midNodes.push(this);
+    this.selected = true;
+    this.draw = () => {
+      // ctx.fillStyle = "purple";
+      ctx.fillStyle = "rgba(92,20,22,0.8)";
+      ctx.fillRect(this.x, this.y, this.width, this.height);
+      ctx.strokeStyle = this.selected ? selectionColor : "#000";
+      ctx.strokeRect(this.x, this.y, this.width, this.height);
+      ctx.fillStyle = "white";
+      ctx.textAlign = "center";
+      ctx.font = `${this.fontSize}px sans-serif`;
+      ctx.fillText(
+        "NOR",
+        this.x + this.width / 2,
+        this.y + this.height / 2 + this.fontSize / 4
+      );
+      for (let i = 0; i < this.inputs.length; ++i) {
+        this.inputs[i].draw();
+      }
+      for (let i = 0; i < this.outputs.length; ++i) {
+        this.outputs[i].draw();
+      }
+      this.update();
+    };
+    this.update = () => {
+      let res = this.inputs[0].value;
+      this.outputs[0].value = !res;
+      if (res) return;
+      for (let i = 1; i < this.inputs.length; ++i) {
+        if (this.inputs[i].value) {
+          res = this.inputs[i].value;
+          this.outputs[0].value = !res;
+          return;
+        }
+      }
+      this.outputs[0].value = !res;
+      // if() this.updateLocation();
+      this.saveString = `new NorNode(${this.x}, ${this.y})`;
+    };
+    this.updateLocation = () => {
+      for (let i = 0; i < this.inputs.length; ++i) {
+        this.inputs[i].x = this.x;
+        this.inputs[i].y = this.y + inputGap * (i + 1);
+        if (this.inputs[i].connectionLine !== null)
+          this.inputs[i].connectionLine.updateLocation();
+      }
+      for (let i = 0; i < this.outputs.length; ++i) {
+        this.outputs[i].x = this.x + this.width;
+        this.outputs[i].y = this.y + outputGap * (i + 1);
+        if (this.outputs[i].connectionLine !== null)
+          this.outputs[i].connectionLine.updateLocation();
+      }
+    };
+    this.reScale = () => {
+      this.height = basicNodes.height / globalScale;
+      this.width = basicNodes.width / globalScale;
+      this.fontSize = 15 / globalScale;
+    };
+    this.delete = () => {
+      allNodes[this.allNodeIndex] = undefined;
+      midNodes[this.midNodeIndex] = undefined;
+      for (let i = 0; i < this.inputs.length; ++i) {
+        this.inputs[i].delete();
+      }
+      for (let i = 0; i < this.outputs.length; ++i) {
+        this.outputs[i].delete();
+      }
+    };
+    this.copy = () => {
+      addNorNode();
+    };
+  }
+}

@@ -101,6 +101,16 @@ function addNandNode() {
   selectedNode.selected = true;
 }
 
+function addNorNode() {
+  newNode = new NorNode(mouseLine.p, mouseLine.q);
+  newNodeFixed = false;
+  hideAddMenu();
+  hideSearchBox();
+  selectedNode.selected = false;
+  selectedNode = newNode;
+  selectedNode.selected = true;
+}
+
 function saveFile() {
   saveString = "";
   allNodes.forEach((node) => {
